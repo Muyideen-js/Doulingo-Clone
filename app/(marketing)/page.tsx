@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Hero from "../../public/Hero.png";
+import Hero from "../../public/Hero.svg";
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -21,7 +21,7 @@ export default function Home() {
         <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center">
           Learn, practice, and master new language with Wi-Lingo
         </h1>
-        <div className="flex flex-col">
+        <div className="flex flex-col item-center gap-y-3 max-w-[330px] w-full">
           <ClerkLoading>
             <LoadingPage />
           </ClerkLoading>
