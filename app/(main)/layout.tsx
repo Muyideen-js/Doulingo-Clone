@@ -1,7 +1,5 @@
-// import Header from "./header";
-// import Footer from "./footer";
 import { Poppins } from "next/font/google";
-import "../globals.css"
+import "../globals.css";
 import MobileHeader from "@/components/mobileHeader";
 import SideBar from "@/components/sidebar";
 
@@ -20,15 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <div className={`${poppins.className} h-full`}>
-      {/* <Header /> */}
       <MobileHeader />
       <div className="hidden lg:flex">
-      <SideBar />
+        <SideBar />
       </div>
       <main className="lg:pl-[256px] h-full pt-[50px] lg:pt-0">
-        <div className="bg-red-500 h-full">{children}</div>
+        <div className="max-w-[1056px] pt-6 mx-auto h-full">{children}</div>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }

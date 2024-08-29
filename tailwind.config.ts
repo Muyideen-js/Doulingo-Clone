@@ -169,6 +169,9 @@ const config: Config = {
           paddingBottom: "0.75rem",
           borderRadius: "1rem",
           fontWeight: "bold",
+          "&:hover": {
+          backgroundColor: "#e2e8f0",
+          },
         },
         ".btn-super-outline": {
           backgroundColor: "white",
