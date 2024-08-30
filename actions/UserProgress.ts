@@ -8,13 +8,17 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const upsertUserProgress = async (courseId: number) => {
-    const { userId } = await auth();
-    const user = await currentUser();
-    
-    if (!userId || !user) {
-        throw new Error("Unauthorized access");
-    }
-    
+  // Assuming auth() does not return a Promise, remove the await
+  const { userId } = auth(); // No await here
+  const user = await currentUser(); // Assuming currentUser() is async
+  console.log("userId:", userId); // Log userId to see if it's defined
+  console.log("user:", user); 
+
+  if (!userId || !user) {
+    redirect("/");
+    return;
+  }
+
   const course = await getCourseById(courseId);
 
   const existingUserProgress = await getUserProgress();
@@ -26,19 +30,19 @@ export const upsertUserProgress = async (courseId: number) => {
       UserimageSrc: user.imageUrl || "/mascot.svg",
     });
 
-    revalidatePath("/learn")
-    revalidatePath("/courses")
-    redirect('/learn')
+    revalidatePath("/learn");
+    revalidatePath("/courses");
+    redirect("/learn");
   }
 
   await db.insert(userProgress).values({
-    userId,
-    activeCourseId: courseId,
+    userId: Number(userId), // Convert userId to number if necessary
     username: user.firstName || "User",
+    activeCourseId: courseId,
     UserimageSrc: user.imageUrl || "/mascot.svg",
   });
 
-  revalidatePath("/learn")
-  revalidatePath("/courses")
-  redirect('/learn')
+  revalidatePath("/learn");
+  revalidatePath("/courses");
+  redirect("/learn");
 };
