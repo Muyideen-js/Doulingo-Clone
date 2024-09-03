@@ -12,16 +12,14 @@ export const coursesRelations = relations(courses, ({many}) => ({
 }));
 
 export const userProgress = pgTable("users_progress", {
-    userId: serial("User_id").primaryKey(),
+    userId: text("user_id").primaryKey(),
     username: text("username").notNull().default("User"),
     UserimageSrc: text("user_image_src").notNull().default("/mascot.svg"),
-    activeCourseId: integer("active_course_id").references(()=> courses.id, 
-    {onDelete: 'cascade'}),
+    activeCourseId: integer("active_course_id").references(() => courses.id, { onDelete: 'cascade' }),
     hearts: integer("hearts").notNull().default(5),
     point: integer("point").notNull().default(5),
-
-});
-
+  });
+  
 
 export const userProgressRalation = relations(userProgress, ({one}) => ({
     activeCourse: one(courses,{

@@ -4,20 +4,27 @@ import { auth } from "@clerk/nextjs/server";
 import { courses, userProgress } from "./schema";
 import { eq } from "drizzle-orm";
 
-export const getUserProgress = cache(async ()=> {
-    const {userId} = await auth();
+export const getUserProgress = cache(async () => {
+    const { userId } = await auth();
 
-    if(!userId) {
-        return null
+    console.log("User ID:", userId); 
+
+    if (!userId) {
+        return null;
     }
+
     const data = await db.query.userProgress.findFirst({
         where: eq(userProgress.userId, userId),
         with: {
-                activeCourse: true,
+            activeCourse: true,
         },
     });
+
+    console.log("User Progress Data:", data); // Debugging
+
     return data;
 });
+
 
 export const getCourses = cache(async ()=> {
 

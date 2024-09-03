@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider afterMultiSessionSingleSignOutUrl='/' signUpForceRedirectUrl='/learn' signInForceRedirectUrl="/learn" afterSignOutUrl='/'>
+    <ClerkProvider signUpForceRedirectUrl='/learn' signInForceRedirectUrl="/learn" afterSignOutUrl='/'>
       <html lang="en">
         <body className={font.className}>{children}</body>
       </html>
